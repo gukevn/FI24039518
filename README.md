@@ -1,2 +1,0 @@
-# FI24039518
-Estructura_De_Datos_Lunes_Noche
