@@ -38,7 +38,7 @@ CP1/
 
 ## 3. Instrucciones de Compilación y Ejecución
 
-### 📌 Recursividad
+### Recursividad
 ```bash
 cd CP1/Recursividad
 javac Numbers.java
@@ -55,7 +55,8 @@ java CP1.Colas.TheQueue 15
 
 
 4. Descripción de Implementaciones
-🔷 Recursividad
+
+ Recursividad
 
 Se calcula el valor metálico usando:
 
@@ -67,7 +68,7 @@ Iterativo: usando bucles para replicar la misma lógica.
 
 Se utiliza double con precisión de 10 decimales, según especificación.
 
-🔷 Pilas
+ Pilas
 
 push(x) retorna true si el valor se inserta; false si hay overflow.
 
@@ -75,7 +76,7 @@ pop() y peek() retornan null si la pila está vacía.
 
 La pila se prueba con n + 1 operaciones para validar ambos casos.
 
-🔷 Colas
+Colas
 
 Se utiliza ArrayDeque para almacenar nucleótidos generados aleatoriamente.
 
