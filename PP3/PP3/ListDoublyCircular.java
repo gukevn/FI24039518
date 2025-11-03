@@ -11,34 +11,98 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         tail = null;
     }
 
+    @Override
     public void addFirst(T value) {
+        NodeDoubly<T> newNode = new NodeDoubly<>(value);
+
+        // Caso 1: lista vacía
+        if (head == null) {
+            head = tail = newNode;
+            head.next = head.prev = head;
+            return;
+        }
+
+        // Caso 2: lista con uno o más nodos
+        newNode.next = head;
+        newNode.prev = tail;
+        head.prev = newNode;
+        tail.next = newNode;
+        head = newNode;
     }
 
+    @Override
     public void addLast(T value) {
+        NodeDoubly<T> newNode = new NodeDoubly<>(value);
+
+        // Caso 1: lista vacía
+        if (head == null) {
+            head = tail = newNode;
+            head.next = head.prev = head;
+            return;
+        }
+
+        // Caso 2: lista con uno o más nodos
+        newNode.prev = tail;
+        newNode.next = head;
+        tail.next = newNode;
+        head.prev = newNode;
+        tail = newNode;
     }
 
+    @Override
     public T removeFirst() {
-        T first = null;
-        return first;
+        if (head == null) return null; // lista vacía
+
+        T data = head.data;
+
+        // Caso 1: un solo nodo
+        if (head == tail) {
+            head = tail = null;
+            return data;
+        }
+
+        // Caso 2: más de un nodo
+        head = head.next;
+        head.prev = tail;
+        tail.next = head;
+        return data;
     }
 
+    @Override
     public T removeLast() {
-        T last = null;
-        return last;
+        if (tail == null) return null; // lista vacía
+
+        T data = tail.data;
+
+        // Caso 1: un solo nodo
+        if (head == tail) {
+            head = tail = null;
+            return data;
+        }
+
+        // Caso 2: más de un nodo
+        tail = tail.prev;
+        tail.next = head;
+        head.prev = tail;
+        return data;
     }
 
+    @Override
     public T getFirst() {
         return head != null ? head.data : null;
     }
 
+    @Override
     public T getLast() {
         return tail != null ? tail.data : null;
     }
 
+    @Override
     public Boolean isEmpty() {
         return head == null;
     }
 
+    @Override
     public Integer getSize() {
         var size = 0;
         if (!isEmpty()) {
@@ -51,6 +115,7 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         return size;
     }
 
+    @Override
     public void printList() {
         if (!isEmpty()) {
             var curr = head;
@@ -61,6 +126,7 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         }
     }
 
+    @Override
     public void printListInReverse() {
         if (!isEmpty()) {
             var curr = tail;
@@ -78,14 +144,17 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         ListInterface<Integer> list = new ListDoublyCircular<Integer>();
         var arrayDeque = new ArrayDeque<Integer>();
         var random = new Random();
+
         for (var counter = n * 2; counter > 0; counter--) {
             var value = random.nextInt(0, 10);
             list.addFirst(value);
             arrayDeque.addFirst(value);
+
             value = random.nextInt(0, 10);
             list.addLast(value);
             arrayDeque.addLast(value);
         }
+
         System.out.println();
         System.out.println("List {added: n * 4}: " + arrayDeque);
         System.out.println(" ↳ Size: " + list.getSize());
@@ -96,12 +165,14 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         list.printListInReverse();
         System.out.println(" ↳ Print: ");
         list.printList();
+
         for (var counter = n; counter > 0; counter--) {
             list.removeFirst();
             arrayDeque.removeFirst();
             list.removeLast();
             arrayDeque.removeLast();
         }
+
         System.out.println();
         System.out.println("List {removed: n * 2}: " + arrayDeque);
         System.out.println(" ↳ Size: " + list.getSize());
@@ -112,10 +183,12 @@ public class ListDoublyCircular<T> implements ListInterface<T> {
         list.printListInReverse();
         System.out.println(" ↳ Print: ");
         list.printList();
+
         for (var counter = arrayDeque.size(); counter > 0; counter--) {
             list.removeFirst();
             list.removeLast();
         }
+
         arrayDeque.clear();
         System.out.println();
         System.out.println("List {empty}: " + arrayDeque);
