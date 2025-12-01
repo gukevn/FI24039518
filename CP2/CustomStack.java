@@ -7,25 +7,39 @@ public class CustomStack {
     }
 
     public void push(String word) {
-        var node = new StackNode(word);
+        StackNode node = new StackNode(word);
 
-        // Actualizar
+        // nuevo nodo apunta al actual tope
+        node.setNext(_head);
 
+        // y ahora la cabeza de la pila es este nodo
         _head = node;
     }
 
     public String pop() {
-        String word = null;
+        // pila vacía
+        if (_head == null) {
+            return null;
+        }
 
-        // Actualizar
+        // tomamos la palabra del tope
+        String word = _head.getWord();
+
+        // movemos la cabeza al siguiente nodo
+        _head = _head.getNext();
 
         return word;
     }
 
     public int size() {
-        var length = 0;
+        int length = 0;
+        StackNode current = _head;
 
-        // Actualizar
+        // contamos todos los nodos
+        while (current != null) {
+            length++;
+            current = current.getNext();
+        }
 
         return length;
     }

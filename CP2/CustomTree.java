@@ -13,9 +13,27 @@ public class CustomTree {
     }
 
     private TreeNode insert(TreeNode node, double tf, String word) {
+        // caso base, árbol vacío o subárbol vacío
+        if (node == null) {
+            TreeNode newNode = new TreeNode(tf);
+            newNode.addWord(word);
+            return newNode;
+        }
 
-        // Actualizar
+        double currentTf = node.getTf();
 
+        if (tf < currentTf) {
+            // vamos al subárbol izquierdo
+            node.setLeft(insert(node.getLeft(), tf, word));
+        } else if (tf > currentTf) {
+            // vamos al subárbol derecho
+            node.setRight(insert(node.getRight(), tf, word));
+        } else {
+            // mismo TF, se agrega la palabra a la pila del nodo
+            node.addWord(word);
+        }
+
+        // siempre se retorna la raíz del subárbol actual
         return node;
     }
 
@@ -33,7 +51,7 @@ public class CustomTree {
                 node = node.getLeft();
             }
             node = stack.pop();
-            builder.append(node.getTf() + "\n ↳ " + node.getWords() + "\n\n");
+            builder.append(node.getTf() + "\n" + node.getWords() + "\n\n");
             node = node.getRight();
         }
         return builder.toString();
