@@ -7,23 +7,43 @@ public class CustomQueue {
     }
 
     public void enqueue(int index) {
-        var node = new QueueNode(index);
+        QueueNode node = new QueueNode(index);
 
-        // Actualizar
+        // si la cola está vacía, el nuevo nodo es la cabeza
+        if (_head == null) {
+            _head = node;
+            return;
+        }
+
+        // si no, recorremos hasta el último y lo enlazamos al final
+        QueueNode current = _head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        current.setNext(node);
     }
 
     public int dequeue() {
-        var index = -1;
+        // cola vacía, valor negativo como indica el enunciado
+        if (_head == null) {
+            return -1;
+        }
 
-        // Actualizar
-
+        // tomamos el índice del primer nodo y avanzamos la cabeza
+        int index = _head.getIndex();
+        _head = _head.getNext();
         return index;
     }
 
     public int getSize() {
-        var size = 0;
+        int size = 0;
+        QueueNode current = _head;
 
-        // Actualizar
+        // contamos todos los nodos desde la cabeza hasta el final
+        while (current != null) {
+            size++;
+            current = current.getNext();
+        }
 
         return size;
     }
