@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class CustomGraph {
 
@@ -15,10 +14,23 @@ public class CustomGraph {
     }
 
     private void addEdge(char source, char target) {
-        int src = Arrays.binarySearch(_chars, source);
-        int tgt = Arrays.binarySearch(_chars, target);
-        
-        // Actualizar
+        int sourceIndex = -1;
+        int targetIndex = -1;
+
+        // buscamos las posiciones de los caracteres en el arreglo _chars
+        for (int i = 0; i < _chars.length; i++) {
+            if (_chars[i] == source) {
+                sourceIndex = i;
+            }
+            if (_chars[i] == target) {
+                targetIndex = i;
+            }
+        }
+
+        // si ambos existen en el arreglo, incrementamos la adyacencia
+        if (sourceIndex != -1 && targetIndex != -1) {
+            _matrix[sourceIndex][targetIndex] = _matrix[sourceIndex][targetIndex] + 1;
+        }
     }
 
     public String getMatrix() {
