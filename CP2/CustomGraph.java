@@ -1,4 +1,4 @@
-
+/// chat con chatgpt https://chatgpt.com/share/692de7b0-4f74-8010-a780-06c964d9d75b
 public class CustomGraph {
 
     private char[] _chars;
