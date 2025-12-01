@@ -1,4 +1,4 @@
 *.class
-*.txt
-*.csv
-README.md
+CP2/*.txt
+CP2/*.csv
+CP2/README.md
